@@ -1,0 +1,33 @@
+R_DEF: Internal format may change without notice
+local
+color accent_blue
+color accent_green
+color accent_red
+color bg_dark
+color card_bg
+color card_border
+color text_primary
+color text_secondary
+drawable ic_launcher
+id btn_save
+id btn_test_launch
+id cb_autostart
+id et_package_name
+id sb_delay
+id tv_carlife_status
+id tv_delay_label
+id tv_package_info
+layout activity_main
+string app_name
+string btn_save
+string btn_test_launch
+string chk_enable_autostart
+string status_detected
+string status_not_found
+string tips_usage
+string title_carlife_status
+string title_delay_settings
+string title_package_settings
+string toast_launch_failed
+string toast_launch_success
+string toast_saved

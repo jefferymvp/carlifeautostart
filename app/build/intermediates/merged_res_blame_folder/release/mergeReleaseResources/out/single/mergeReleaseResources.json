@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "C:\\Users\\jeffery\\.gradle\\daemon\\8.11.1\\com.autostart.carlife.app-release-4:\\drawable-mdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\jeffery\\.gradle\\daemon\\8.11.1\\com.autostart.carlife.app-main-5:\\drawable-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\jeffery\\.gradle\\daemon\\8.11.1\\com.autostart.carlife.app-release-4:\\drawable-hdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\jeffery\\.gradle\\daemon\\8.11.1\\com.autostart.carlife.app-main-5:\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\jeffery\\.gradle\\daemon\\8.11.1\\com.autostart.carlife.app-release-4:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\jeffery\\.gradle\\daemon\\8.11.1\\com.autostart.carlife.app-main-5:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\jeffery\\.gradle\\daemon\\8.11.1\\com.autostart.carlife.app-release-4:\\drawable-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\jeffery\\.gradle\\daemon\\8.11.1\\com.autostart.carlife.app-main-5:\\drawable-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "com.autostart.carlife.app-release-4:/layout_activity_main.xml.flat",
+        "source": "com.autostart.carlife.app-main-5:/layout/activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\jeffery\\.gradle\\daemon\\8.11.1\\com.autostart.carlife.app-release-4:\\drawable-xhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\jeffery\\.gradle\\daemon\\8.11.1\\com.autostart.carlife.app-main-5:\\drawable-xhdpi\\ic_launcher.png"
+    }
+]

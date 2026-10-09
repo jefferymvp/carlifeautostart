@@ -1,0 +1,97 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:2:1-49:12
+	package
+		INJECTED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:2:11-69
+	android:installLocation
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:3:5-43
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:6:5-81
+	android:name
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:6:22-78
+application
+ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:8:5-47:19
+INJECTED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:8:5-47:19
+	android:extractNativeLibs
+		INJECTED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml
+	android:label
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:11:9-41
+	android:icon
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:10:9-45
+	android:allowBackup
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:9:9-36
+	android:theme
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:12:9-62
+activity#com.autostart.carlife.ui.MainActivity
+ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:15:9-25:20
+	android:screenOrientation
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:19:13-56
+	android:label
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:17:13-45
+	android:launchMode
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:18:13-43
+	android:exported
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:20:13-36
+	android:name
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:16:13-44
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:21:13-24:29
+action#android.intent.action.MAIN
+ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:22:17-69
+	android:name
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:22:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:23:17-77
+	android:name
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:23:27-74
+receiver#com.autostart.carlife.receiver.BootReceiver
+ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:28:9-40:20
+	android:enabled
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:30:13-35
+	android:exported
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:31:13-36
+	android:name
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:29:13-50
+intent-filter#action:name:android.intent.action.BOOT_COMPLETED+action:name:android.intent.action.QUICKBOOT_POWERON+action:name:android.intent.action.USER_PRESENT+action:name:com.htc.intent.action.QUICKBOOT_POWERON
+ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:32:13-39:29
+	android:priority
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:32:28-51
+action#android.intent.action.BOOT_COMPLETED
+ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:34:17-79
+	android:name
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:34:25-76
+action#android.intent.action.QUICKBOOT_POWERON
+ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:36:17-82
+	android:name
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:36:25-79
+action#com.htc.intent.action.QUICKBOOT_POWERON
+ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:37:17-82
+	android:name
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:37:25-79
+action#android.intent.action.USER_PRESENT
+ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:38:17-77
+	android:name
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:38:25-74
+service#com.autostart.carlife.service.LaunchService
+ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:43:9-45:40
+	android:exported
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:45:13-37
+	android:name
+		ADDED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml:44:13-50
+uses-sdk
+INJECTED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml
+INJECTED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\develop\android-autostarts\carlife-autostart\app\src\main\AndroidManifest.xml

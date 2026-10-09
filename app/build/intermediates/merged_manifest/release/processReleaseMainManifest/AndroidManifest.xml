@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.autostart.carlife"
+    android:installLocation="internalOnly"
+    android:versionCode="1"
+    android:versionName="1.0.0" >
+
+    <uses-sdk
+        android:minSdkVersion="19"
+        android:targetSdkVersion="19" />
+
+    <!-- 开机广播权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="false"
+        android:extractNativeLibs="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Holo.NoActionBar" >
+
+        <!-- 配置与单点测试界面 -->
+        <activity
+            android:name="com.autostart.carlife.ui.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorLandscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 开机与快速开机广播接收器 -->
+        <!-- directBootAware="true" 支持加密与设备就绪阶段直接接收广播 -->
+        <receiver
+            android:name="com.autostart.carlife.receiver.BootReceiver"
+            android:directBootAware="true"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter android:priority="1000" >
+
+                <!-- 直接启动完成广播（Android 7.0+ / 9.0 锁屏前） -->
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                <!-- 标准系统冷启动广播 -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <!-- 车机/方案商快速开机与微休眠唤醒广播 -->
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+                <!-- 亮屏解锁广播 -->
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 后台安全延时拉起服务 -->
+        <service
+            android:name="com.autostart.carlife.service.LaunchService"
+            android:exported="false" />
+    </application>
+
+</manifest>

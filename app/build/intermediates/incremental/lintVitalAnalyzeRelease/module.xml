@@ -1,0 +1,19 @@
+<lint-module
+    format="1"
+    dir="C:\develop\android-autostarts\carlife-autostart\app"
+    name=":app"
+    type="APP"
+    maven="carlife-autostart:app:unspecified"
+    agpVersion="8.10.1"
+    buildFolder="build"
+    bootClassPath="C:\develop\android-sdk\platforms\android-34\android.jar;C:\develop\android-sdk\build-tools\35.0.0\core-lambda-stubs.jar"
+    javaSourceLevel="1.8"
+    compileTarget="android-34"
+    neverShrinking="true">
+  <lintOptions
+      abortOnError="true"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true"/>
+  <variant name="release"/>
+</lint-module>
