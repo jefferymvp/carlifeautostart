@@ -1,0 +1,35 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.autostart.carlife'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.autostart.carlife"
+        minSdk 19
+        targetSdk 19
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    // 纯原生 Android SDK 基础组件，不依赖额外庞大三方库，保证在 Android 4.4 车机上秒启动、零内存消耗
+}
