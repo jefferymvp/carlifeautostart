@@ -2,8 +2,8 @@
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="com.autostart.carlife"
 4    android:installLocation="internalOnly"
-5    android:versionCode="1"
-6    android:versionName="1.0.0" >
+5    android:versionCode="2"
+6    android:versionName="1.0.1" >
 7
 8    <uses-sdk
 9        android:minSdkVersion="19"
