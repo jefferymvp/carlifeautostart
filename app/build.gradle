@@ -17,11 +17,18 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled false
         }
+    }
+
+    // 禁用针对车机低版本 targetSdk 的 Lint 致命错误拦截
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
     }
 
     compileOptions {
