@@ -1,11 +1,15 @@
-name: Build CarLife AutoStarter APK
+name: Build and Release CarLife AutoStarter APK
 
 on:
   push:
     branches: [ "main", "master" ]
+    tags: [ "v*" ]
   pull_request:
     branches: [ "main", "master" ]
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -28,14 +32,31 @@ jobs:
     - name: Build Debug and Release APK
       run: ./gradlew assembleDebug assembleRelease
 
-    - name: Upload Debug APK
+    - name: Prepare APKs for Release
+      run: |
+        mkdir -p release-apks
+        cp app/build/outputs/apk/release/app-release.apk release-apks/CarLifeAutoStarter-Release.apk
+        cp app/build/outputs/apk/debug/app-debug.apk release-apks/CarLifeAutoStarter-Debug.apk
+
+    - name: Upload Debug APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: CarLifeAutoStarter-Debug-APK
-        path: app/build/outputs/apk/debug/*.apk
+        path: release-apks/CarLifeAutoStarter-Debug.apk
 
-    - name: Upload Release APK
+    - name: Upload Release APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: CarLifeAutoStarter-Release-APK
-        path: app/build/outputs/apk/release/*.apk
+        path: release-apks/CarLifeAutoStarter-Release.apk
+
+    - name: Publish APK to GitHub Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          release-apks/CarLifeAutoStarter-Release.apk
+          release-apks/CarLifeAutoStarter-Debug.apk
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
