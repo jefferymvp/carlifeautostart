@@ -29,20 +29,13 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build Debug and Release APK
-      run: ./gradlew assembleDebug assembleRelease
+    - name: Build Release APK
+      run: ./gradlew assembleRelease
 
-    - name: Prepare APKs for Release
+    - name: Prepare Release APK
       run: |
         mkdir -p release-apks
         cp app/build/outputs/apk/release/app-release.apk release-apks/CarLifeAutoStarter-Release.apk
-        cp app/build/outputs/apk/debug/app-debug.apk release-apks/CarLifeAutoStarter-Debug.apk
-
-    - name: Upload Debug APK Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: CarLifeAutoStarter-Debug-APK
-        path: release-apks/CarLifeAutoStarter-Debug.apk
 
     - name: Upload Release APK Artifact
       uses: actions/upload-artifact@v4
@@ -56,7 +49,6 @@ jobs:
       with:
         files: |
           release-apks/CarLifeAutoStarter-Release.apk
-          release-apks/CarLifeAutoStarter-Debug.apk
         generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
