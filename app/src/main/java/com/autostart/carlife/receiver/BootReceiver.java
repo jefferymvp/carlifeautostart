@@ -3,6 +3,7 @@ package com.autostart.carlife.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -24,7 +25,19 @@ public class BootReceiver extends BroadcastReceiver {
         String action = intent.getAction();
         Log.i(TAG, "BootReceiver 收到系统广播: " + action);
 
-        final ConfigManager configManager = new ConfigManager(context);
+        // 兼容 Android 7.0+ Direct Boot 模式的设备保护存储空间
+        Context safeContext = context;
+        if (Build.VERSION.SDK_INT >= 24) {
+            try {
+                if (!context.isDeviceProtectedStorage()) {
+                    safeContext = context.createDeviceProtectedStorageContext();
+                }
+            } catch (Throwable t) {
+                safeContext = context;
+            }
+        }
+
+        final ConfigManager configManager = new ConfigManager(safeContext);
         if (!configManager.isAutoStartEnabled()) {
             Log.i(TAG, "开机自启开关为关闭状态，忽略该广播。");
             return;
@@ -42,7 +55,6 @@ public class BootReceiver extends BroadcastReceiver {
         isExecuting = true;
 
         // 使用 Android 官方标准的 goAsync() 机制保持广播接收器异步存活
-        // 兼容 Android 4.4 到 Android 14，彻底规避 Android 8.0+ 的后台服务启动限制
         final PendingResult pendingResult = goAsync();
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override

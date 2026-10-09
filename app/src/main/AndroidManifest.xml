@@ -25,16 +25,21 @@
         </activity>
 
         <!-- 开机与快速开机广播接收器 -->
+        <!-- directBootAware="true" 支持加密与设备就绪阶段直接接收广播 -->
         <receiver
             android:name=".receiver.BootReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:directBootAware="true">
             <intent-filter android:priority="1000">
+                <!-- 直接启动完成广播（Android 7.0+ / 9.0 锁屏前） -->
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
                 <!-- 标准系统冷启动广播 -->
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <!-- 车机/方案商快速开机与微休眠唤醒广播 -->
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+                <!-- 亮屏解锁广播 -->
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
