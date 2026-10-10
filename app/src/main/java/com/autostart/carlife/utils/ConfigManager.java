@@ -27,6 +27,8 @@ public class ConfigManager {
 
     public static final String DEFAULT_CARLIFE_VEHICLE_PKG = "com.baidu.carlifevehicle";
     public static final String DEFAULT_CARLIFE_GENERAL_PKG = "com.baidu.carlife";
+    public static final String PACKAGE_DIPLAY = "com.shihab.diplay";
+
 
     public static final int DEFAULT_DELAY_SECONDS = 30;
     public static final boolean DEFAULT_AUTO_START_ENABLED = true;

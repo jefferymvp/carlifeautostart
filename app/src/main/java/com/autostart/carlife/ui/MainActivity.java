@@ -5,12 +5,17 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +24,8 @@ import com.autostart.carlife.utils.AppLauncher;
 import com.autostart.carlife.utils.ConfigManager;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -26,16 +33,20 @@ public class MainActivity extends Activity {
 
     private ConfigManager configManager;
 
-    private TextView tvStatus;
-    private TextView tvPackageInfo;
     private CheckBox cbAutoStart;
     private CheckBox cbUseFileStorage;
     private TextView tvFileStorageDesc;
     private TextView tvDelayLabel;
     private SeekBar sbDelay;
+    private Spinner spTargetApp;
     private EditText etPackageName;
     private Button btnTestLaunch;
     private Button btnSave;
+
+    private List<AppLauncher.CandidateApp> candidateApps = new ArrayList<AppLauncher.CandidateApp>();
+    private ArrayAdapter<AppLauncher.CandidateApp> spinnerAdapter;
+    private boolean isUpdatingFromSpinner = false;
+    private boolean isUpdatingFromEditText = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,18 +56,17 @@ public class MainActivity extends Activity {
         configManager = new ConfigManager(this);
 
         initViews();
+        initCandidateApps();
         loadSettings();
-        checkAndDisplayStatus();
     }
 
     private void initViews() {
-        tvStatus = (TextView) findViewById(R.id.tv_carlife_status);
-        tvPackageInfo = (TextView) findViewById(R.id.tv_package_info);
         cbAutoStart = (CheckBox) findViewById(R.id.cb_autostart);
         cbUseFileStorage = (CheckBox) findViewById(R.id.cb_use_file_storage);
         tvFileStorageDesc = (TextView) findViewById(R.id.tv_file_storage_desc);
         tvDelayLabel = (TextView) findViewById(R.id.tv_delay_label);
         sbDelay = (SeekBar) findViewById(R.id.sb_delay);
+        spTargetApp = (Spinner) findViewById(R.id.sp_target_app);
         etPackageName = (EditText) findViewById(R.id.et_package_name);
         btnTestLaunch = (Button) findViewById(R.id.btn_test_launch);
         btnSave = (Button) findViewById(R.id.btn_save);
@@ -89,6 +99,44 @@ public class MainActivity extends Activity {
             }
         });
 
+        spTargetApp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (isUpdatingFromEditText) return;
+                if (position >= 0 && position < candidateApps.size()) {
+                    AppLauncher.CandidateApp selected = candidateApps.get(position);
+                    isUpdatingFromSpinner = true;
+                    if (selected.packageName != null && !selected.packageName.isEmpty()) {
+                        etPackageName.setText(selected.packageName);
+                    } else {
+                        // 选择了最后一项：自定义包名
+                        etPackageName.requestFocus();
+                    }
+                    isUpdatingFromSpinner = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        etPackageName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isUpdatingFromSpinner) return;
+                String input = s.toString().trim();
+                isUpdatingFromEditText = true;
+                syncSpinnerSelection(input);
+                isUpdatingFromEditText = false;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
         btnTestLaunch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +161,35 @@ public class MainActivity extends Activity {
         });
     }
 
+    private void initCandidateApps() {
+        candidateApps = AppLauncher.getCandidateApps(this);
+        spinnerAdapter = new ArrayAdapter<AppLauncher.CandidateApp>(
+                this,
+                R.layout.item_app_spinner,
+                candidateApps
+        );
+        spinnerAdapter.setDropDownViewResource(R.layout.item_app_dropdown);
+        spTargetApp.setAdapter(spinnerAdapter);
+    }
+
+    private void syncSpinnerSelection(String currentPkg) {
+        if (candidateApps == null || candidateApps.isEmpty()) return;
+        int customIndex = candidateApps.size() - 1;
+        int targetIndex = customIndex;
+
+        for (int i = 0; i < candidateApps.size(); i++) {
+            AppLauncher.CandidateApp app = candidateApps.get(i);
+            if (app.packageName != null && app.packageName.equalsIgnoreCase(currentPkg)) {
+                targetIndex = i;
+                break;
+            }
+        }
+
+        if (spTargetApp.getSelectedItemPosition() != targetIndex) {
+            spTargetApp.setSelection(targetIndex);
+        }
+    }
+
     private void loadSettings() {
         cbAutoStart.setChecked(configManager.isAutoStartEnabled());
         boolean useFileStorage = configManager.isUseFileStorage();
@@ -124,7 +201,21 @@ public class MainActivity extends Activity {
         updateDelayLabel(delay);
 
         String configuredPkg = configManager.getTargetPackage();
+        if (configuredPkg == null || configuredPkg.trim().isEmpty()) {
+            // 若未配置，优先从已安装候选列表中选用第一个已安装应用
+            for (AppLauncher.CandidateApp app : candidateApps) {
+                if (app.isInstalled && app.packageName != null && !app.packageName.isEmpty()) {
+                    configuredPkg = app.packageName;
+                    break;
+                }
+            }
+            if (configuredPkg == null) {
+                configuredPkg = ConfigManager.DEFAULT_CARLIFE_VEHICLE_PKG;
+            }
+        }
+
         etPackageName.setText(configuredPkg);
+        syncSpinnerSelection(configuredPkg);
     }
 
     private void updateDelayLabel(int seconds) {
@@ -140,28 +231,6 @@ public class MainActivity extends Activity {
         } else {
             tvFileStorageDesc.setText(R.string.desc_file_storage);
             tvFileStorageDesc.setTextColor(getResources().getColor(R.color.text_secondary));
-        }
-    }
-
-    private void checkAndDisplayStatus() {
-        String detectedPkg = AppLauncher.detectInstalledCarLifePackage(this);
-        if (detectedPkg != null) {
-            String versionName = AppLauncher.getPackageVersionName(this, detectedPkg);
-            String desc = (ConfigManager.DEFAULT_CARLIFE_VEHICLE_PKG.equals(detectedPkg) ? "车载定制版" : "通用互联版");
-            if (versionName != null) {
-                desc += " v" + versionName;
-            }
-            tvStatus.setText(String.format(getString(R.string.status_detected), desc));
-            tvPackageInfo.setText("已识别包名: " + detectedPkg);
-
-            // 若当前输入框为空或未配置，自动填入检测到的包名
-            if (etPackageName.getText().toString().trim().isEmpty()) {
-                etPackageName.setText(detectedPkg);
-            }
-        } else {
-            tvStatus.setText(R.string.status_not_found);
-            tvStatus.setTextColor(getResources().getColor(R.color.accent_red));
-            tvPackageInfo.setText("当前车机未检测到官方 CarLife 安装包");
         }
     }
 

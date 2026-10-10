@@ -8,6 +8,22 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- Android 11+ 包可见性声明：允许精准探测 CarLife 与各类 Apple/CarPlay 互联组件 -->
+    <queries>
+        <package android:name="com.baidu.carlifevehicle" />
+        <package android:name="com.baidu.carlife" />
+        <package android:name="com.shihab.diplay" />
+        <package android:name="com.zjinnova.zlink" />
+        <package android:name="cn.manstep.phonemirrorbox" />
+        <package android:name="com.carlinke.carplay" />
+        <package android:name="com.apple.carplay" />
+        <package android:name="com.huawei.hicar.carlink" />
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
