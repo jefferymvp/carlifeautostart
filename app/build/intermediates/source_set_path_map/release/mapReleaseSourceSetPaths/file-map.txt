@@ -1,7 +1,0 @@
-com.autostart.carlife.app-pngs-0 C:\develop\android-autostarts\carlife-autostart\app\build\generated\res\pngs\release
-com.autostart.carlife.app-resValues-1 C:\develop\android-autostarts\carlife-autostart\app\build\generated\res\resValues\release
-com.autostart.carlife.app-packageReleaseResources-2 C:\develop\android-autostarts\carlife-autostart\app\build\intermediates\incremental\release\packageReleaseResources\merged.dir
-com.autostart.carlife.app-packageReleaseResources-3 C:\develop\android-autostarts\carlife-autostart\app\build\intermediates\incremental\release\packageReleaseResources\stripped.dir
-com.autostart.carlife.app-release-4 C:\develop\android-autostarts\carlife-autostart\app\build\intermediates\merged_res\release\mergeReleaseResources
-com.autostart.carlife.app-main-5 C:\develop\android-autostarts\carlife-autostart\app\src\main\res
-com.autostart.carlife.app-release-6 C:\develop\android-autostarts\carlife-autostart\app\src\release\res

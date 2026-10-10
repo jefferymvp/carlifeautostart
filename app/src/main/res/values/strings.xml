@@ -5,12 +5,14 @@
     <string name="btn_test_launch">立即测试启动 CarLife</string>
     <string name="title_delay_settings">开机延时启动（秒）：</string>
     <string name="title_package_settings">目标包名设置：</string>
-    <string name="chk_enable_autostart">允许开机自动拉起 CarLife</string>
+    <string name="chk_enable_autostart">允许开机自动拉起应用</string>
+    <string name="chk_use_file_storage">优先使用文件存储配置（防车机掉电丢失）</string>
+    <string name="desc_file_storage">启用后将配置同步写入内部存储与 /sdcard/ 配置文件，开机优先加载，防止熄火突然断电后配置丢失。</string>
     <string name="btn_save">保存当前配置</string>
     <string name="status_detected">已检测到车载版 CarLife（%1$s）</string>
     <string name="status_not_found">未检测到 CarLife，请检查是否已安装</string>
-    <string name="tips_usage">【车机使用说明】\n1. 首次在车机上安装本应用后，必须在桌面上手动打开一次以激活系统开机广播。\n2. 建议开机延时设置为 6~10 秒，等待车机桌面和底层音频驱动初始化就绪。\n3. 点击上方“立即测试启动”可直接验证是否能成功跳转。</string>
+    <string name="tips_usage">【车机使用说明】\n1. 首次在车机上安装本应用后，必须在桌面上手动打开一次以激活系统开机广播。\n2. 默认开机延时已预设为 30 秒（可在 0~60 秒范围滑动调整），避开车机启动高峰期。\n3. 点击“立即测试启动”会自动保存并尝试拉起目标应用。\n4. 若经常遇到熄火断电后设置恢复默认，请勾选“优先使用文件存储配置”。</string>
     <string name="toast_saved">配置已成功保存！</string>
-    <string name="toast_launch_success">正在拉起 CarLife...</string>
+    <string name="toast_launch_success">正在拉起应用...</string>
     <string name="toast_launch_failed">启动失败：未找到目标应用或包名错误！</string>
 </resources>
